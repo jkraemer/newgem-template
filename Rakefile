@@ -1,8 +1,14 @@
 require "bundler"
 Bundler.setup
 
-require "rspec/core/rake_task"
-Rspec::Core::RakeTask.new(:spec)
+require 'rake/testtask'
+
+desc 'Test the library.'
+Rake::TestTask.new(:test) do |t|
+  t.libs << 'lib'
+  t.pattern = 'test/**/*_test.rb'
+  t.verbose = true
+end
 
 gemspec = eval(File.read("newgem.gemspec"))
 
